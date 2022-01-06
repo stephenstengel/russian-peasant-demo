@@ -9,6 +9,8 @@
 #define TRUE 1
 #define FALSE 0
 
+#define MAX_TEST_NUM 46340
+
 int rp(int n, int m);
 int rpBit(int n, int m);
 _Bool isCorrectOutput(int output, int n, int m);
@@ -124,23 +126,24 @@ _Bool isCorrectOutput(int output, int n, int m)
 int testFunction()
 {
 	_Bool noErrors = TRUE;
-	while (noErrors)
+
+	//can go up to 46340 n and m on my computer before rollover.
+	int n = 1;
+	int m = 1;
+	for ( ; (n <= MAX_TEST_NUM) && noErrors; n++)
 	{
-		//can go up to 46340 n and m on my computer before rollover.
-		for (int n = 1; n <= 9999 && noErrors; n++)
+		for ( ; (m <= MAX_TEST_NUM) && noErrors; m++)
 		{
-			for (int m = 1; m <= 9999 && noErrors; m++)
-			{
-				noErrors = isCorrectOutput( rp(n, m), n, m);
-			}
+			noErrors = isCorrectOutput( rp(n, m), n, m);
 		}
 	}
 
 	if (noErrors)
 	{
 		printf("No errors found!\n");
+		//printf("final n: %d\tfinal m: %d\n", n, m);
 	}
-	else printf("Error found!\n");
+	else printf("Error found for n: %d and m: %d!\n", n, m);
 
 	return noErrors;
 }
