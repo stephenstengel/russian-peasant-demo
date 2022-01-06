@@ -127,18 +127,20 @@ int testFunction()
 	while (noErrors)
 	{
 		//can go up to 46340 n and m on my computer before rollover.
-		for (int n = 1; n <= 9999; n++)
+		for (int n = 1; n <= 9999 && noErrors; n++)
 		{
-			for (int m = 1; m <= 9999; m++)
+			for (int m = 1; m <= 9999 && noErrors; m++)
 			{
 				noErrors = isCorrectOutput( rp(n, m), n, m);
 			}
 		}
-
-		printf("No errors found!\n");
-		return noErrors;
 	}
 
-	printf("Error found!\n");
+	if (noErrors)
+	{
+		printf("No errors found!\n");
+	}
+	else printf("Error found!\n");
+
 	return noErrors;
 }
